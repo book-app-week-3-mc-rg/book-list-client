@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <script id="book-template" type="text/x-handlebars-template">
+  <script id="book-list-template" type="text/x-handlebars-template">
     <div>
       <img id="cover-img" src="{{image_url}}" />
       <h1 id="title-id" >{{title}}</h1>
@@ -20,10 +20,10 @@
   </header>
   <main class="clearfix">
     <h1>My Books</h1>
-    <section id="view">
+    <section id="book-list">
     </section>
   </main>
-  <section id="about" >
+  <section id="about" class="container" >
     <h1>About Us</h1>
     <h2>Mike Castor</h2>
       <p>A human being</p>
@@ -34,5 +34,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
   <script src="scripts/models/book.js"></script>
   <script src="scripts/views/book-view.js"></script>
+  <script>$(document).ready( function() {
+    console.log('Document is ready');
+    app.Book.fetchAll(bookView.initIndexPage);
+   }
+  </script>
 </body>
 </html>
