@@ -5,8 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <script id="book-template" type="text/x-handlebars-template">
+    <div>
+      <img id="cover-img" src="{{image_url}}" />
+      <h1 id="title-id" >{{title}}</h1>
+      <h2 id="author-id" >{{author}}</h2>
+    </div>
+  </script>
 </head>
 <body>
-  hello world
+  <header>
+    <img id="icon" src="http://via.placeholder.com/150x100" />
+    <h1>Books App</h1>
+  </header>
+  <main class="clearfix">
+    <h1>My Books</h1>
+    <section id="view">
+    </section>
+  </main>
+  <section id="about" >
+    <h1>About Us</h1>
+    <h2>Mike Castor</h2>
+      <p>A human being</p>
+    <h2>Ryan Groesch</h2>
+      <p>Another human like object</p>
+  </section>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="scripts/models/book.js"></script>
+  <script src="scripts/views/book-view.js"></script>
 </body>
 </html>
