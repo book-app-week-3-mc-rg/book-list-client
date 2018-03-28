@@ -7,9 +7,9 @@
   <title>Document</title>
   <script id="book-list-template" type="text/x-handlebars-template">
     <div>
-      <img id="cover-img" src="{{image_url}}" />
-      <h1 id="title-id" >{{title}}</h1>
-      <h2 id="author-id" >{{author}}</h2>
+      <img id="image_url" src="{{image_url}}" />
+      <h1 id="title" >{{title}}</h1>
+      <h2 id="author" >{{author}}</h2>
     </div>
   </script>
 </head>
@@ -36,8 +36,8 @@
   <script src="scripts/views/book-view.js"></script>
   <script>$(document).ready( function() {
     console.log('Document is ready');
-    app.Book.fetchAll(bookView.initIndexPage);
-   }
+    app.Book.fetchAll(app.bookView.initIndexPage);
+   })
   </script>
 </body>
 </html>

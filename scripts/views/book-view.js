@@ -13,7 +13,7 @@ var app = app || {};
     $('.book-view').show();
   }
 
-  app.bookView = bookView;
+  module.bookView = bookView;
 }) (app)
 
 
