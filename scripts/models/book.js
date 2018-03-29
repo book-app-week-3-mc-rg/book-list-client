@@ -13,8 +13,6 @@ var app = app || {};
   ENV.developmentApiUrl = 'localhost3000:8080';
   ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
-
-
   //Constructor refactor to the lab 10 version including key value pair iteration...
 
   //Book constructor function
@@ -50,11 +48,11 @@ var app = app || {};
       })
   };
 
-  Book.fetchOne = callback => {
-    $.get(`${local}/api/vi/books/:id`)
+  Book.fetchOne = (ctx, callback) => { //added ctx to the parameters in class
+    $.get(`${local}/api/vi/books/:id`) //ctx.params.book_id}`)
       .then(results => {
         app.Book.loadBook(results);
-        callback();
+        callback(ctx); //passed context into the callback in class
       })
   };
 
