@@ -50,5 +50,19 @@ var app = app || {};
       })
   };
 
+  Book.fetchOne = callback => {
+    $.get(`${local}/api/vi/books/:id`)
+      .then(results => {
+        app.Book.loadBook(results);
+        callback();
+      })
+  };
+
+  Book.prototype.create = function(callback) {
+    $.post(`${local}/api/v1/books`, {author: this.author, title: this.title, isbn: this.isbn, image_url: this.image_url, description: this.description})
+      .then(console.log('create complete'))
+      .then(callback);
+  };
+
   module.Book = Book;
 }) (app)
