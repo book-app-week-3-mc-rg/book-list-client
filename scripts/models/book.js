@@ -2,21 +2,22 @@
 
 var app = app || {};
 
+//declare environment variable
+const ENV = {};
+
+//set the environment
+ENV.isProduction = window.location.protocol === 'https:';
+ENV.productionApiUrl = 'https://book-app-week-3-mc-rg.github.io/book-list-client/';
+ENV.developmentApiUrl = 'localhost:3000'; //we removed 8080
+ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
+
 (function (module) {
-
-  //declare environment variable
-  const ENV = {};
-
-  //set the environment
-  ENV.isProduction = window.location.protocol === 'https:';
-  ENV.productionApiUrl = 'https://book-app-week-3-mc-rg.github.io/book-list-client/';
-  ENV.developmentApiUrl = 'localhost3000:8080';
-  ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
   //Constructor refactor to the lab 10 version including key value pair iteration...
 
   //Book constructor function
   function Book (input) {
+    this.book_id = input.book_id;
     this.author = input.author;
     this.title = input.title;
     this.isbn = input.isbn;
@@ -32,6 +33,11 @@ var app = app || {};
     return template(this);
   };
 
+  Book.prototype.detailToHtml = function () {
+    let template = Handlebars.compile($('#detail-view-template').text());
+    return template(this);
+  };
+
   Book.loadAll = rows => {
     rows.sort((a,b) => ((a.title) - (b.title)))
 
@@ -41,18 +47,18 @@ var app = app || {};
   const local = 'http://localhost:3000';
 
   Book.fetchAll = callback => {
-    $.get(`${local}/api/v1/books`) //ENV.apiUrl
+    $.get(`http://localhost:3000/api/v1/books`) //ENV.apiUrl
       .then(results => {
         app.Book.loadAll(results); //we think this is the problem...
         callback();
       })
   };
 
-  Book.fetchOne = (ctx, callback) => { //added ctx to the parameters in class
-    $.get(`${local}/api/vi/books/:id`) //ctx.params.book_id}`)
+  Book.fetchOne = (ctx, callback) => { 
+    $.get(`http://localhost:3000/api/v1/books/${ctx.params.book_id}`) 
       .then(results => {
-        app.Book.loadBook(results);
-        callback(ctx); //passed context into the callback in class
+        console.log(results);
+        callback(ctx, results);
       })
   };
 
@@ -61,6 +67,11 @@ var app = app || {};
       .then(console.log('create complete'))
       .then(callback);
   };
+
+// Book.about = function(callback) {
+//   $.get
+// }
+
 
   module.Book = Book;
 }) (app)
