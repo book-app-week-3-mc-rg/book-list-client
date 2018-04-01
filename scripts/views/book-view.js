@@ -1,4 +1,3 @@
-//add book-view codez here
 'use strict';
 
 //IFFE
@@ -21,7 +20,7 @@ var app = app || {};
     console.log("inside detail", results);
     //add rendering for template, section id="detail-view"
     //target the section listen for click on button
-    $('#detail-view').append(app.Book.detailToHtml(results)).addClass('.detail');
+    $('#detail-view').append(results.detailToHtml()).addClass('.detail');
     $('#detail-view').show();
   }
 

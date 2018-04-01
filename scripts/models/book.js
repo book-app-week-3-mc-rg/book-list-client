@@ -57,13 +57,13 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
   Book.fetchOne = (ctx, callback) => { 
     $.get(`http://localhost:3000/api/v1/books/${ctx.params.book_id}`) 
       .then(results => {
-        console.log(results);
-        callback(ctx, results);
+        console.log(results[0]);
+        callback(ctx, new Book(results[0]));
       })
   };
 
   Book.prototype.create = function(callback) {
-    $.post(`${local}/api/v1/books`, {author: this.author, title: this.title, isbn: this.isbn, image_url: this.image_url, description: this.description})
+    $.post(`${local}/api/v1/books`, {author: this.author, title: this.title, isbn: this.isbn, image_url: this.image_url, description: this.description})//needs book_id
       .then(console.log('create complete'))
       .then(callback);
   };
