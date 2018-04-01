@@ -4,12 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="/styles/base.css" >
+  <link rel="stylesheet" type="text/css" href="/styles/icons.css" >
+  <link rel="stylesheet" type="text/css" href="/styles/layout.css" >
+  <link rel="stylesheet" type="text/css" href="/styles/modules.css" >
+  <link rel="stylesheet" type="text/css" href="/styles/reset.css" >
+  <svg class="icon icon-menu"><use xlink:href="#icon-menu"></use></svg>
+  <title>Book App</title>
   <script id="book-list-template" type="text/x-handlebars-template">
     <div>
       <img id="image_url" src="{{image_url}}" />
       <h1 id="title" >{{title}}</h1>
       <h2 id="author" >{{author}}</h2>
+      <a href="/books/{{book_id}}">mass details</a>
+      <button id="details" >more details</button>
+    </div>
+  </script>
+  <script id="detail-view-template" type="text/x-handlebars-template">
+    <div>
+      <img id="image_url" src="{{image_url}}" />
+      <h1 id="title" >{{title}}</h1>
+      <h2 id="author" >{{author}}</h2>
+      <h2 id="isbn" >{{isbn}}</h2>
+      <p id="description">{{description}}</p>
     </div>
   </script>
 </head>
@@ -18,15 +35,36 @@
     <img id="icon" src="http://via.placeholder.com/150x100" />
     <h1>Books App</h1>
   </header>
+  <nav>
+    <ul>
+      <li> <a href="/">Home </a></li>
+      <li>Add</li>
+      <li> <a href="/about"> About Us</a></li>
+      <li><a href="/admin">Admin</a></li>
+    </ul>
+  </nav>
   <main class="clearfix">
     <h1>My Books</h1>
     <section id="book-list">
+      <!-- populated books with button listen for click pass this id to the detailview -->
     </section>
   </main>
   <section id="detail-view" class="container" >
     This is where a single book will be displayed.
   </section>
-  <section id="form-view" class="container" >This is where the form is going to be.</section>
+  <section id="form-view" class="container"> 
+    <h2>Add a New Book</h2>
+      <form>
+          <ul>
+           <li><input type="text" name="title" placeholder="title" ></li>
+           <li><input type="text" name="author" placeholder="author" ></li>
+           <li><input type="text" name="ISBN 12345" placeholder="ISBN 12345" ></li>
+           <li><input type="text" name="image url" placeholder="image url" ></li>
+           <li><input type="text" name="description" placeholder="description" ></li>
+          </ul>
+          <button id="submit" >submit</button>
+         </form>
+</section>
   <section id="about" class="container" >
     <h1>About Us</h1>
     <h2>Mike Castor</h2>
@@ -36,8 +74,10 @@
   </section>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
   <script src="scripts/models/book.js"></script>
   <script src="scripts/views/book-view.js"></script>
+  <script src="scripts/views/routes.js"></script>
   <script>$(document).ready( function() {
     console.log('Document is ready');
     app.Book.fetchAll(app.bookView.initIndexPage);
